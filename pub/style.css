@@ -1,0 +1,21 @@
+Pub QPlainTextEdit {
+  border-style: solid;
+  border-width: 1px;
+  border-left-color: #252525;
+  border-right-color: #3f3f3f;
+  border-top-color: #252525;
+  border-bottom-color: #3f3f3f;
+  background-color: #191919; }
+Pub #Body QPushButton {
+  border-style: solid;
+  border-width: 1px;
+  border-left-color: #585858;
+  border-right-color: #3e3e3e;
+  border-top-color: #585858;
+  border-bottom-color: #3e3e3e;
+  background-color: #4b4b4b;
+  min-height: 30; }
+  Pub #Body QPushButton:hover {
+    background-color: #585858; }
+  Pub #Body QPushButton:hover:pressed {
+    background-color: #656565; }

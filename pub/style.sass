@@ -1,0 +1,41 @@
+$dark:      rgb(25, 25, 25)
+$mid:       rgb(50, 50, 50)
+$bright:    rgb(75, 75, 75)
+
+$red:       hsl(0, 50%, 50%)
+$highlight: hsl(35%, 50%, 80%)
+
+
+@mixin outset
+    border-style: solid
+    border-width: 1px
+    border-left-color: lighten($bright, 5%)
+    border-right-color: darken($bright, 5%)
+    border-top-color: lighten($bright, 5%)
+    border-bottom-color: darken($bright, 5%)
+
+
+@mixin inset
+    border-style: solid
+    border-width: 1px
+    border-left-color: darken($mid, 5%)
+    border-right-color: lighten($mid, 5%)
+    border-top-color: darken($mid, 5%)
+    border-bottom-color: lighten($mid, 5%)
+
+
+Pub
+    QPlainTextEdit
+        @include inset
+        background-color: $dark
+
+    #Body QPushButton
+        @include outset
+        background-color: $bright
+        min-height: 30
+
+        &:hover
+            background-color: lighten($bright, 5%)
+
+        &:hover:pressed
+            background-color: lighten($bright, 10%)
