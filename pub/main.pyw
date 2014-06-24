@@ -1,10 +1,10 @@
-"""Main entry-point for Lib
+"""Main entry-point for Pub
 
 Usage:
     From a command shell
 
-    $ main.pyw path=/my/path
-    $ main.pyw path=/my/path --port=5555
+    $ main.pyw
+    $ main.pyw --port=5555
 
 """
 
