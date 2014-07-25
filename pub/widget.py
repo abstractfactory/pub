@@ -20,6 +20,14 @@ class Pub(pigui.pyqt5.widgets.application.widget.ApplicationBase):
 
         body = QtWidgets.QWidget()
 
+        context = zmq.Context.instance()
+        self.insocket = context.socket(zmq.PUSH)
+
+        if port:
+            endpoint = "tcp://127.0.0.1:{}".format(port)
+            self.insocket.connect(endpoint)
+            self.notify("Connecting to {}".format(endpoint))
+
         comment_box = QtWidgets.QPlainTextEdit()
         comment_box.setPlaceholderText("Comment..")
         accept_button = QtWidgets.QPushButton('Publish')
@@ -49,22 +57,13 @@ class Pub(pigui.pyqt5.widgets.application.widget.ApplicationBase):
             return self.notify("Not connected to any host")
 
         comment = self.findChild(QtWidgets.QWidget, 'CommentBox').toPlainText()
-        context = zmq.Context.instance()
-        socket = context.socket(zmq.REQ)
-        socket.connect("tcp://127.0.0.1:{}".format(self.port))
 
         msg = {'type': 'command',
                'command': 'publish',
-               'comment': comment}
+               'payload': comment}
 
-        socket.send_json(msg)
+        self.insocket.send_json(msg)
 
-        recv = socket.recv_json()
-        if not recv.get('status') == 'ok':
-            self.notify("Host did not accept")
-            raise ValueError(recv)
-
-        # Successfully published
         self.animated_close()
 
 
